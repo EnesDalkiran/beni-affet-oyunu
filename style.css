@@ -9,110 +9,70 @@ body {
   overflow: hidden;
 }
 
-/* ================= TAP OVERLAY ================= */
 #tap-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0,0,0,0.6);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
-  z-index: 1000;
+  font-size: 24px;
+  z-index: 999;
   cursor: pointer;
-  text-align: center;
 }
 
-#tap-overlay.hidden {
-  display: none;
-}
-
-/* ================= GAME SCREEN ================= */
 #game-screen {
   position: relative;
   width: 100vw;
   height: 100vh;
   text-align: center;
   padding-top: 80px;
-  z-index: 1;
 }
 
 h1 {
   color: #d6336c;
-  font-size: 32px;
-  margin-bottom: 40px;
 }
 
-/* ================= BUTTONS ================= */
 .buttons-container {
   position: relative;
   width: 100%;
-  height: 250px;
+  height: 200px;
+  margin-top: 40px;
 }
 
-.btn {
+#btn-runaway,
+#btn-accept {
   position: absolute;
-  padding: 15px 30px;
+  padding: 15px 25px;
   border: none;
   border-radius: 30px;
   font-size: 16px;
   cursor: pointer;
-  user-select: none;
+  transition: transform 0.3s ease;
 }
 
-/* Kaçan buton */
 #btn-runaway {
-  background: #cccccc;
-  left: 20%;
-  top: 80px;
+  background: #ccc;
 }
 
-/* Kabul butonu */
 #btn-accept {
   background: #ff5c8a;
   color: white;
   left: 50%;
-  top: 160px;
+  top: 120px;
   transform: translateX(-50%) scale(var(--accept-scale, 1));
-  transition: transform 0.2s ease;
 }
 
-/* ================= FINAL SCREEN ================= */
-#final-screen {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(180deg, #ffb6c1, #ffe4ec);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-}
-
-#final-screen.hidden {
+.hidden {
   display: none;
 }
 
-.final-content {
-  text-align: center;
-}
-
-.final-content h2 {
-  font-size: 40px;
-  color: #c9184a;
-}
-
-.final-content p {
-  font-size: 20px;
-  color: #6a040f;
-}
-
-/* ================= HEARTS ================= */
+/* Hearts */
 #hearts-container {
-  position: fixed;
+  position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
 }
 
 .heart {
@@ -122,16 +82,7 @@ h1 {
 }
 
 @keyframes float {
-  0% {
-    transform: translateY(0);
-    opacity: 0.7;
-  }
-  50% {
-    transform: translateY(-40px);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 0.7;
-  }
+  0% { transform: translateY(0); opacity: 0.8; }
+  50% { transform: translateY(-40px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.8; }
 }
