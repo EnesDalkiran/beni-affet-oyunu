@@ -1,6 +1,3 @@
-/* ===============================
-   GLOBAL RESET
-================================ */
 * {
   box-sizing: border-box;
 }
@@ -12,120 +9,110 @@ body {
   overflow: hidden;
 }
 
-/* ===============================
-   TAP OVERLAY (MUSIC START)
-================================ */
+/* ================= TAP OVERLAY ================= */
 #tap-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.65);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  z-index: 999;
+  font-size: 26px;
+  z-index: 1000;
   cursor: pointer;
-  transition: opacity 0.4s ease;
+  text-align: center;
 }
 
-/* 🔥 CRITICAL FIX */
 #tap-overlay.hidden {
-  opacity: 0;
-  pointer-events: none;
+  display: none;
 }
 
-/* ===============================
-   GAME SCREEN
-================================ */
+/* ================= GAME SCREEN ================= */
 #game-screen {
   position: relative;
   width: 100vw;
   height: 100vh;
   text-align: center;
   padding-top: 80px;
+  z-index: 1;
 }
 
 h1 {
   color: #d6336c;
+  font-size: 32px;
+  margin-bottom: 40px;
 }
 
-/* ===============================
-   BUTTONS
-================================ */
+/* ================= BUTTONS ================= */
 .buttons-container {
   position: relative;
   width: 100%;
   height: 250px;
-  margin-top: 40px;
 }
 
-#btn-runaway,
-#btn-accept {
+.btn {
   position: absolute;
-  padding: 15px 28px;
+  padding: 15px 30px;
   border: none;
   border-radius: 30px;
   font-size: 16px;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  user-select: none;
 }
 
-/* Runaway button */
+/* Kaçan buton */
 #btn-runaway {
   background: #cccccc;
-  left: 30%;
-  top: 120px;
+  left: 20%;
+  top: 80px;
 }
 
-/* Accept button */
+/* Kabul butonu */
 #btn-accept {
   background: #ff5c8a;
   color: white;
   left: 50%;
-  top: 180px;
+  top: 160px;
   transform: translateX(-50%) scale(var(--accept-scale, 1));
+  transition: transform 0.2s ease;
 }
 
-/* ===============================
-   FINAL SCREEN
-================================ */
+/* ================= FINAL SCREEN ================= */
 #final-screen {
   position: fixed;
   inset: 0;
-  background: linear-gradient(180deg, #ffb3c6, #fff0f5);
+  background: linear-gradient(180deg, #ffb6c1, #ffe4ec);
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  z-index: 1000;
+  z-index: 2000;
 }
 
-.final-content h2 {
-  color: #d6336c;
-  font-size: 36px;
-}
-
-.final-content p {
-  font-size: 18px;
-  color: #333;
-}
-
-/* ===============================
-   HIDDEN
-================================ */
-.hidden {
+#final-screen.hidden {
   display: none;
 }
 
-/* ===============================
-   HEARTS BACKGROUND
-================================ */
+.final-content {
+  text-align: center;
+}
+
+.final-content h2 {
+  font-size: 40px;
+  color: #c9184a;
+}
+
+.final-content p {
+  font-size: 20px;
+  color: #6a040f;
+}
+
+/* ================= HEARTS ================= */
 #hearts-container {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
 }
 
 .heart {
@@ -134,13 +121,10 @@ h1 {
   animation: float 6s infinite ease-in-out;
 }
 
-/* ===============================
-   HEART ANIMATION
-================================ */
 @keyframes float {
   0% {
     transform: translateY(0);
-    opacity: 0.8;
+    opacity: 0.7;
   }
   50% {
     transform: translateY(-40px);
@@ -148,6 +132,6 @@ h1 {
   }
   100% {
     transform: translateY(0);
-    opacity: 0.8;
+    opacity: 0.7;
   }
 }
