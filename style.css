@@ -1,3 +1,6 @@
+/* ===============================
+   GLOBAL RESET
+================================ */
 * {
   box-sizing: border-box;
 }
@@ -9,10 +12,13 @@ body {
   overflow: hidden;
 }
 
+/* ===============================
+   TAP OVERLAY (MUSIC START)
+================================ */
 #tap-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   color: white;
   display: flex;
   align-items: center;
@@ -20,8 +26,18 @@ body {
   font-size: 24px;
   z-index: 999;
   cursor: pointer;
+  transition: opacity 0.4s ease;
 }
 
+/* 🔥 CRITICAL FIX */
+#tap-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===============================
+   GAME SCREEN
+================================ */
 #game-screen {
   position: relative;
   width: 100vw;
@@ -34,17 +50,20 @@ h1 {
   color: #d6336c;
 }
 
+/* ===============================
+   BUTTONS
+================================ */
 .buttons-container {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 250px;
   margin-top: 40px;
 }
 
 #btn-runaway,
 #btn-accept {
   position: absolute;
-  padding: 15px 25px;
+  padding: 15px 28px;
   border: none;
   border-radius: 30px;
   font-size: 16px;
@@ -52,27 +71,61 @@ h1 {
   transition: transform 0.3s ease;
 }
 
+/* Runaway button */
 #btn-runaway {
-  background: #ccc;
+  background: #cccccc;
+  left: 30%;
+  top: 120px;
 }
 
+/* Accept button */
 #btn-accept {
   background: #ff5c8a;
   color: white;
   left: 50%;
-  top: 120px;
+  top: 180px;
   transform: translateX(-50%) scale(var(--accept-scale, 1));
 }
 
+/* ===============================
+   FINAL SCREEN
+================================ */
+#final-screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, #ffb3c6, #fff0f5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 1000;
+}
+
+.final-content h2 {
+  color: #d6336c;
+  font-size: 36px;
+}
+
+.final-content p {
+  font-size: 18px;
+  color: #333;
+}
+
+/* ===============================
+   HIDDEN
+================================ */
 .hidden {
   display: none;
 }
 
-/* Hearts */
+/* ===============================
+   HEARTS BACKGROUND
+================================ */
 #hearts-container {
-  position: absolute;
+  position: fixed;
   inset: 0;
   pointer-events: none;
+  z-index: 1;
 }
 
 .heart {
@@ -81,8 +134,20 @@ h1 {
   animation: float 6s infinite ease-in-out;
 }
 
+/* ===============================
+   HEART ANIMATION
+================================ */
 @keyframes float {
-  0% { transform: translateY(0); opacity: 0.8; }
-  50% { transform: translateY(-40px); opacity: 1; }
-  100% { transform: translateY(0); opacity: 0.8; }
+  0% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-40px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
 }
