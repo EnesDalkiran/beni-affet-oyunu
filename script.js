@@ -1,4 +1,4 @@
-// ================= CONFIG =================
+// CONFIG
 const CONFIG = {
   youtubeVideoId: 'G7VgtKp0sOM',
   acceptScaleIncrement: 0.12,
@@ -6,13 +6,11 @@ const CONFIG = {
   numberOfHearts: 15,
 };
 
-// ================= STATE =================
 let btnRunaway, btnAccept, tapOverlay, gameScreen, finalScreen;
 let acceptScale = 1;
 let youtubePlayer = null;
 let musicStarted = false;
 
-// ================= INIT =================
 document.addEventListener('DOMContentLoaded', () => {
   btnRunaway = document.getElementById('btn-runaway');
   btnAccept = document.getElementById('btn-accept');
@@ -21,12 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
   finalScreen = document.getElementById('final-screen');
 
   createHearts();
+  setupTapOverlay();
   setupRunawayButton();
   setupAcceptButton();
-  setupTapOverlay();
 });
 
-// ================= HEARTS =================
+// ❤️ HEARTS
 function createHearts() {
   const container = document.getElementById('hearts-container');
   const hearts = ['❤️','💖','💕'];
@@ -42,7 +40,7 @@ function createHearts() {
   }
 }
 
-// ================= RUNAWAY BUTTON =================
+// 🏃‍♂️ KAÇAN BUTON
 function setupRunawayButton() {
   const container = btnRunaway.parentElement;
 
@@ -56,11 +54,6 @@ function setupRunawayButton() {
   }
 
   btnRunaway.addEventListener('mouseenter', move);
-  btnRunaway.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    move();
-  }, { passive: false });
-
   btnRunaway.addEventListener('click', (e) => {
     e.preventDefault();
     move();
@@ -69,42 +62,43 @@ function setupRunawayButton() {
   move();
 }
 
-// ================= ACCEPT BUTTON =================
+// ❤️ BÜYÜYEN AFFEDİYORUM
 function growAcceptButton() {
   acceptScale = Math.min(
     acceptScale + CONFIG.acceptScaleIncrement,
     CONFIG.maxAcceptScale
   );
-  btnAccept.style.setProperty('--accept-scale', acceptScale);
+  btnAccept.style.transform = `translateX(-50%) scale(${acceptScale})`;
 }
 
+// ✅ AFFEDİYORUM
 function setupAcceptButton() {
   btnAccept.addEventListener('click', () => {
-    gameScreen.style.display = 'none';
-    finalScreen.style.display = 'flex';
+    gameScreen.classList.add('hidden');
+    finalScreen.classList.remove('hidden');
   });
 }
 
-// ================= OVERLAY + MUSIC =================
+// 👆 İLK DOKUNUŞ
 function setupTapOverlay() {
-  tapOverlay.addEventListener('click', startMusicOnce);
-  tapOverlay.addEventListener('touchstart', startMusicOnce, { passive: true });
+  tapOverlay.addEventListener('click', startGame, { once: true });
+  tapOverlay.addEventListener('touchstart', startGame, { once: true });
 }
 
-function startMusicOnce() {
+function startGame() {
   if (musicStarted) return;
   musicStarted = true;
 
-  // OVERLAY'I GERÇEKTEN ÖLDÜR
+  // overlay TAMAMEN devre dışı
   tapOverlay.style.display = 'none';
   tapOverlay.style.pointerEvents = 'none';
 
-  if (youtubePlayer && youtubePlayer.playVideo) {
+  if (youtubePlayer) {
     youtubePlayer.playVideo();
   }
 }
 
-// ================= YOUTUBE =================
+// 🎵 YOUTUBE API
 function onYouTubeIframeAPIReady() {
   youtubePlayer = new YT.Player('youtube-player', {
     height: '1',
@@ -113,9 +107,7 @@ function onYouTubeIframeAPIReady() {
     playerVars: {
       autoplay: 0,
       loop: 1,
-      playlist: CONFIG.youtubeVideoId,
-      controls: 0,
-      modestbranding: 1,
+      playlist: CONFIG.youtubeVideoId
     }
   });
 }
